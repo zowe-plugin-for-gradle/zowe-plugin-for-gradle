@@ -1,0 +1,42 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.11.0'
+}
+
+// Zowe CLI Plugin for Gradle
+group = 'org.zowe.gradle.plugin'
+version = '1.0.1-SNAPSHOT'
+
+dependencies {
+    compile gradleApi()
+    compile 'org.glassfish.jersey.core:jersey-client:2.30.1'
+    testCompile 'junit:junit:4.13'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+gradlePlugin {
+  plugins {
+    zoweGradlePlugin {
+      id = 'org.zowe.gradle.plugin'
+      implementationClass = 'org.zowe.gradle.plugin.ZowePluginForGradle'
+    }
+  }
+}
+
+pluginBundle {
+  website = 'https://github.com/zowe-plugin-for-gradle/zowe-plugin-for-gradle'
+  vcsUrl = 'https://github.com/zowe-plugin-for-gradle/zowe-plugin-for-gradle'
+  description = 'Zowe Plugin for Gradle'
+  tags = ['Zowe', 'z/OS', 'Open Mainframe', 'Gradle', 'Plugin', 'Zowe CLI']
+
+  plugins {
+    zoweGradlePlugin {
+      displayName = 'Zowe Plugin for Gradle'
+    }
+  }
+}
